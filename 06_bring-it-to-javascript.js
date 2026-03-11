@@ -11,7 +11,7 @@ const productA = {
 
 const productB = {
   productId: "product_id_2",
-  productName: "Classic Office Tote Bag",
+  productName: "Classic เรOffice Tote Bag",
   material: "Canvas",
   price: 1200
 };
