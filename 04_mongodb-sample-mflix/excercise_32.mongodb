@@ -1,0 +1,12 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+
+db.movies.aggregate([ //MongoDB Aggregate Pipeline เพื่อดึงข้อมูลหนังจากฐานข้อมูล sample_mflix
+  { $match: { year: { $gte: 2000, $lte: 2010 } } }, //ค้นหาหนังที่ออกในช่วงปี 2000 ถึง 2010
+  { $group: { _id: "$year", totalMovies: { $sum: 1 } } }, //จัดกลุ่มข้อมูลตามปีและนับจำนวนหนังในแต่ละปี
+  { $sort: { _id: 1 } } //เรียงลำดับผลลัพธ์ตามปีโดย ascending ทุก document ที่อยู่ในปีเดียวกัน บวกเพิ่ม 1
+])
+
+//Count how many movies were released each year between 2000 - 2010 (inclusive). 

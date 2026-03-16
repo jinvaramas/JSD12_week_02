@@ -1,0 +1,25 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+db.movies.aggregate([ //MongoDB Aggregate Pipeline เพื่อดึงข้อมูลหนังจากฐานข้อมูล sample_mflix
+  {
+    $match: {
+      $and: [
+        { year: { $gte: 2000, $lte: 2009 } },   //ค้นหาหนังที่ออกในช่วงปี 2000 ถึง 2009
+        {
+          $or: [                               
+            { genres: "Drama" },
+            { "imdb.rating": { $gte: 7.0 } } //ค้นหาหนังที่มี genre เป็น Drama หรือมีคะแนน IMDb อย่างน้อย 7.0
+          ]
+        }
+      ]
+    }
+  },
+  { $limit: 10 },
+  { $project: { _id: 0, title: 1, year: 1, genres: 1, "imdb.rating": 1 } } //เลือกฟิลด์ที่ต้องการให้แสดง
+])
+
+//Get up to 10 movies that
+//Have “Drama” in their genres or an IMDb rating ≥ 7,
+//and were released in the 2000s (2000–2009).

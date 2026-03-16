@@ -1,0 +1,18 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+db.movies.find( //ค้นหาหนังจาก collection movies
+  {
+    year: { $gt: 2010 }, //ค้นหาหนังที่ออกหลังปี 2010                         
+    $or: [ //เลือกข้อมูลที่ตรงกับเงื่อนไขใดเงื่อนไขหนึ่ง
+      { genres: "Drama" },                       // ค้นหาหนังที่มีประเภท Drama
+      { "imdb.rating": { $gte: 8 } }    //ค้นหาหนังที่มีคะแนน IMDb ≥ 8         
+    ]
+  },
+  { _id: 0, title: 1, year: 1, genres: 1, "imdb.rating": 1 } 
+).limit(10); // _id: 0 → ไม่แสดง _i / title: 1 → แสดงชื่อหนัง /year: 1 → แสดงปี/genres: 1 → แสดงประเภท/imdb.rating": 1 → แสดงคะแนน IMDb
+
+
+
+//Retrieve up to 10 movies that are released after 2010 and belong to the Drama genre or have IMDB rating >= 8).  

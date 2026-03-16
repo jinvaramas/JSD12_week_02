@@ -1,0 +1,13 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+db.movies.find( // ค้นหาข้อมูลจาก collection movies
+  {
+    year: 1995,              // condition #1 //ค้นหาหนังที่ออกในปี 1995
+    genres: "Action"         // condition #2  → implicit AND // ค้นหาหนังที่มี genre เป็น Action
+  },
+  { _id: 0, title: 1, year: 1, genres: 1 }   // projection // Projection ใช้สำหรับ กำหนดว่าจะให้แสดง field อะไรบ้าง 1แสดง field 0 ไม่แสดง field
+);
+
+//List all movies released in 1995 and classified as “Action”. 

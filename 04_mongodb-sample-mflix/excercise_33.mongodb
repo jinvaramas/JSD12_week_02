@@ -1,0 +1,11 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+db.movies.aggregate([ //MongoDB Aggregate Pipeline เพื่อดึงข้อมูลหนังจากฐานข้อมูล sample_mflix
+  { $unwind: "$genres" }, //แยก array ของ genres ออกเป็นเอกสารแยกกัน
+  { $sortByCount: "$genres" },   // groups + counts + sorts, all in one
+  { $limit: 10 } //จำกัดผลลัพธ์ไม่เกิน 10 รายการ
+])
+
+//Find the 10 most common genres across the entire dataset.

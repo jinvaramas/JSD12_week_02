@@ -1,0 +1,10 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+db.movies.find({ directors: { $in: ["Hal Roach"] } });
+
+
+//What is the movie with the earliest release year directed by Hal Roach?
+
+// 1.'From Hand to Mouth 2.High and Dizzy 3.Now or Never

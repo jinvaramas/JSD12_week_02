@@ -1,0 +1,14 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+
+
+db.movies.countDocuments({ //นับจำนวนหนังที่ตรงตามเงื่อนไข
+  directors: "Hal Roach", //หนังที่กำกับโดย Hal Roach
+  "awards.wins": { $gt: 0 }, //ค้นหาหนังที่มีจำนวนรางวัลที่ชนะมากกว่า 0
+});
+
+
+//How many awards did Hal Roach’s movies win?
+// 0

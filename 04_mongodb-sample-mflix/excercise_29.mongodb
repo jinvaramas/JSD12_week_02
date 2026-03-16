@@ -1,0 +1,17 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+db.movies.find( // ค้นหาข้อมูลจาก collection movies
+  {
+    $or: [ //operator ที่ใช้สำหรับ ค้นหาข้อมูลที่ตรงกับเงื่อนไขใดเงื่อนไขหนึ่ง
+      { languages: "French" }, //หนังที่มีภาษา French
+      { languages: "Spanish" } //หนังที่มีภาษา Spanish
+    ]
+  },
+  { _id: 0, title: 1, languages: 1 } //_id: 0 → ไม่แสดง _id title: 1 → แสดงชื่อหนัง languages: 1 → แสดงภาษา
+);
+
+
+
+//Find movies whose primary spoken language is French or Spanish.  

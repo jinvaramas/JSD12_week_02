@@ -1,0 +1,18 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+
+db.movies.aggregate([ //MongoDB Aggregate Pipeline เพื่อดึงข้อมูลหนังจากฐานข้อมูล sample_mflix
+  {
+    $match: { //ค้นหาหนังที่ออกหลังปี 2010 และมีคะแนน IMDb อย่างน้อย 8.0
+      $and: [
+        { year: { $gt: 2010 } },
+        { "imdb.rating": { $gte: 8.0 } }
+      ]
+    }
+  },
+  { $project: { _id: 0, title: 1, year: 1, "imdb.rating": 1 } } //เลือกฟิลด์ที่ต้องการให้แสดง
+])
+
+//Find all movies released after 2010 and with an IMDb rating of at least 8.0. 

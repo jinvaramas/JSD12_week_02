@@ -1,0 +1,18 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+
+db.movies.aggregate([ //MongoDB Aggregate Pipeline เพื่อดึงข้อมูลหนังจากฐานข้อมูล sample_mflix
+  {
+    $match: {
+      $or: [
+        { languages: "English" },
+        { languages: "French" } //ค้นหาหนังที่มีภาษาหลักเป็น English หรือ French
+      ]
+    }
+  },
+  { $project: { _id: 0, title: 1, languages: 1 } } //เลือกฟิลด์ที่ต้องการให้แสดง
+])
+
+//Find movies where the primary spoken language is English or French. 

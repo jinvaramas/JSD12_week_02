@@ -1,0 +1,12 @@
+// ดึงข้อมูลจาก sample_mflix
+
+use("sample_mflix");
+
+db.movies.aggregate([ //MongoDB Aggregate Pipeline เพื่อดึงข้อมูลหนังจากฐานข้อมูล sample_mflix
+  { $match: { directors: "Christopher Nolan" } }, //หนังที่กำกับโดย Christopher Nolan
+  { $sort: { year: -1 } }, //เรียงลำดับตามปีโดย descending
+  { $limit: 5 }, //จำกัดผลลัพธ์ไม่เกิน 5 รายการ
+  { $project: { _id: 0, title: 1, year: 1 } } //เลือกฟิลด์ที่ต้องการให้แสดง
+])
+
+//Retrieve the five most-recent films directed by Christopher Nolan. 
